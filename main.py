@@ -5,7 +5,43 @@ from __future__ import annotations
 import asyncio
 import contextlib
 import signal
+import subprocess
 import sys
+from pathlib import Path
+
+
+def _prepare_environment() -> None:
+    """Atualiza o pip e instala as dependências declaradas em requirements.txt."""
+    project_dir = Path(__file__).resolve().parent
+    requirements_file = project_dir / "requirements.txt"
+
+    if not requirements_file.is_file():
+        raise FileNotFoundError(
+            f"Arquivo requirements.txt não encontrado em: {requirements_file}"
+        )
+
+    python = sys.executable
+
+    print("[PIP] Atualizando o pip...")
+    subprocess.run(
+        [python, "-m", "pip", "install", "--upgrade", "pip"],
+        cwd=project_dir,
+        check=True,
+    )
+
+    print("[PIP] Instalando dependências do requirements.txt...")
+    subprocess.run(
+        [python, "-m", "pip", "install", "-r", str(requirements_file)],
+        cwd=project_dir,
+        check=True,
+    )
+
+    print("[Fusion] Ambiente preparado com sucesso.")
+
+
+# Executa antes dos imports do projeto, pois eles podem depender
+# dos pacotes declarados em requirements.txt.
+_prepare_environment()
 
 from src.bot.client import FusionBot
 from src.core.config import get_settings
