@@ -133,7 +133,7 @@ O **Fusion Bot** foi projetado para eliminar a necessidade de editar arquivos JS
 
 ```text
 fusion-bot/
-├── .github/
+├── github/
 │   ├── ISSUE_TEMPLATE/           # Templates YAML de Bug Report e Feature Request
 │   ├── workflows/
 │   │   └── ci.yml                # Pipeline GitHub Actions (Ruff, Mypy, Pytest)
@@ -167,7 +167,6 @@ fusion-bot/
 ├── tests/                        # Suíte de testes unitários e de integração
 ├── .env.example
 ├── CODE_OF_CONDUCT.md
-├── CONTRIBUTING.md
 ├── LICENSE
 ├── pyproject.toml
 ├── README.md
