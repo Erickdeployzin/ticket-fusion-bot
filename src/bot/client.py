@@ -77,16 +77,17 @@ class FusionBot(commands.AutoShardedBot):
 
         if self.ctx.settings.dev_guild_id:
             guild_obj = discord.Object(id=self.ctx.settings.dev_guild_id)
+            self.tree.clear_commands(guild=guild_obj)
             self.tree.copy_global_to(guild=guild_obj)
-            synced = await self.tree.sync(guild=guild_obj)
+            synced_guild = await self.tree.sync(guild=guild_obj)
             logger.info(
                 "Comandos slash sincronizados na guild de desenvolvimento (%s): %d comandos.",
                 self.ctx.settings.dev_guild_id,
-                len(synced),
+                len(synced_guild),
             )
-        else:
-            synced = await self.tree.sync()
-            logger.info("Comandos slash sincronizados globalmente: %d comandos.", len(synced))
+
+        synced_global = await self.tree.sync()
+        logger.info("Comandos slash sincronizados globalmente: %d comandos.", len(synced_global))
 
     async def on_ready(self) -> None:
         """Evento disparado quando o cliente e shards estão prontos."""
