@@ -18,8 +18,6 @@ Plataforma modular e escalável para administração profissional de comunidades
   - [2. Sistema Profissional de Tickets](#2-sistema-profissional-de-tickets)
   - [3. Editor Visual de Mensagens e Componentes Interativos](#3-editor-visual-de-mensagens-e-componentes-interativos)
   - [4. Mensagens Automáticas e Agendador Persistente](#4-mensagens-automáticas-e-agendador-persistente)
-- [Arquitetura e Stack Tecnológica](#arquitetura-e-stack-tecnológica)
-- [Estrutura de Diretórios](#estrutura-de-diretórios)
 ---
 
 ## Guia Rápido de Uso (Comandos, Configurações e Menus)
@@ -116,46 +114,3 @@ O **Fusion Bot** foi projetado para eliminar a necessidade de editar arquivos JS
 | **Dados** | `Pydantic v2`, `aiosqlite`, `aiomysql`, `asyncpg`, `motor` | Schemas unificados e repositórios assíncronos multi-banco |
 
 ---
-
-## Estrutura de Diretórios
-
-```text
-fusion-bot/
-├── github/
-│   ├── ISSUE_TEMPLATE/           # Templates YAML de Bug Report e Feature Request
-│   ├── workflows/
-│   │   └── ci.yml                # Pipeline GitHub Actions (Ruff, Mypy, Pytest)
-│   ├── CODEOWNERS
-│   ├── dependabot.yml
-│   └── PULL_REQUEST_TEMPLATE.md
-├── docs/
-│   ├── ARCHITECTURE.md           # Detalhamento técnico das camadas e persistência
-│   └── SETUP_GUIDE.md            # Guia completo de setup e produção
-├── scripts/
-│   └── init_db.py                # CLI de inicialização, health-check e geração de chaves
-├── src/
-│   ├── bot/
-│   │   ├── cogs/                 # system_cog, admin_cog, tickets_cog, automations_cog
-│   │   ├── modals/               # Modals de configuração, formulários e avaliações
-│   │   ├── ui/                   # Tema visual, embeds padrão e componentes base
-│   │   ├── views/                # Painel administrativo e DynamicItems persistentes
-│   │   └── client.py             # Cliente principal FusionBot
-│   ├── core/                     # Config, crypto, exceções, lifecycle, logger, permissions
-│   ├── database/
-│   │   ├── interfaces/           # Contratos abstratos dos repositórios
-│   │   ├── providers/            # Provedores SQLite, MySQL, PostgreSQL e MongoDB
-│   │   ├── factory.py            # Fábrica de seleção de provedor
-│   │   └── schemas.py            # Modelos Pydantic v2
-│   ├── services/                 # Guild, Ticket, Automation, Transcript, Placeholder, Log
-│   ├── tasks/
-│   │   └── scheduler.py          # Motor assíncrono de agendamentos persistentes
-│   ├── templates/
-│   │   └── transcript.html       # Template HTML responsivo para transcripts
-│   └── main.py                   # Entrypoint com graceful shutdown
-├── tests/                        # Suíte de testes unitários e de integração
-├── .env.example
-├── CODE_OF_CONDUCT.md
-├── LICENSE
-├── pyproject.toml
-├── README.md
-└── SECURITY.md
