@@ -1,0 +1,27 @@
+name: Sugerir Funcionalidade
+description: Proponha uma melhoria ou novo recurso para o Fusion Bot.
+title: "[Feature]: "
+labels: ["enhancement"]
+
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problema ou Necessidade
+      description: Qual cenário administrativo ou de atendimento esta funcionalidade resolve?
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Solução Proposta
+      description: Como você imagina o fluxo no `/painel` ou na interação com os membros?
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativas Consideradas (opcional)
+      description: Existem outras abordagens ou configurações que você já utiliza atualmente?
