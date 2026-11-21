@@ -1,0 +1,1 @@
+"""Implementação SQLAlchemy 2.x para bancos relacionais (SQLite, MySQL, MariaDB, PostgreSQL)."""

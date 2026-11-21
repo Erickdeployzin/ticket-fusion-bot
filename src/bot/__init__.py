@@ -1,0 +1,1 @@
+"""Camada de apresentação Discord (cliente, comandos, views, modals e componentes UI)."""

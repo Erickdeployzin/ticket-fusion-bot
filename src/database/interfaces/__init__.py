@@ -1,0 +1,1 @@
+"""Interfaces abstratas da camada de persistência."""

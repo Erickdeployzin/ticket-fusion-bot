@@ -1,0 +1,1 @@
+"""Views de administração e execução em tempo real do sistema de tickets."""

@@ -1,0 +1,1 @@
+"""Núcleo de infraestrutura, configuração, segurança e ciclo de vida do Fusion Bot."""

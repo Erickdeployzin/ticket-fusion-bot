@@ -1,0 +1,1 @@
+"""Implementação nativa assíncrona para MongoDB via PyMongo AsyncMongoClient."""

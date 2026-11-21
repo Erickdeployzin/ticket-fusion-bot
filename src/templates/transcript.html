@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transcript #{{ "%04d"|format(ticket.ticket_number) }} — {{ guild_name }}</title>
+    <style>
+        :root {
+            --bg-main: #111318;
+            --bg-card: #191c24;
+            --bg-msg: #1e222b;
+            --bg-embed: #252a35;
+            --border: #2d3340;
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --accent: #5865f2;
+            --accent-soft: rgba(88, 101, 242, 0.16);
+            --success: #10b981;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+            background: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.55;
+            padding: 24px 16px;
+        }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+        .header {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 16px;
+            margin-bottom: 16px;
+        }
+        .server-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+        .badge {
+            background: var(--accent-soft);
+            color: #93a3ff;
+            border: 1px solid rgba(88, 101, 242, 0.35);
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 14px;
+        }
+        .meta-item {
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 14px;
+        }
+        .meta-label {
+            font-size: 0.74rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+        }
+        .meta-value {
+            font-size: 0.92rem;
+            font-weight: 600;
+            margin-top: 2px;
+            word-break: break-word;
+        }
+        .form-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px 24px;
+            margin-bottom: 20px;
+        }
+        .form-box h3 {
+            font-size: 0.95rem;
+            color: #a5b4fc;
+            margin-bottom: 10px;
+        }
+        .form-row {
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        .messages {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .msg-card {
+            background: var(--bg-msg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 16px;
+            display: flex;
+            gap: 14px;
+        }
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+            background: var(--border);
+        }
+        .msg-body {
+            flex: 1;
+            min-width: 0;
+        }
+        .msg-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 4px;
+        }
+        .author-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .bot-tag {
+            background: var(--accent);
+            color: #fff;
+            font-size: 0.68rem;
+            font-weight: 700;
+            padding: 1px 6px;
+            border-radius: 4px;
+        }
+        .timestamp {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+        }
+        .msg-content {
+            font-size: 0.93rem;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            color: #e5e7eb;
+        }
+        .embed-preview {
+            margin-top: 8px;
+            background: var(--bg-embed);
+            border-left: 4px solid var(--accent);
+            border-radius: 6px;
+            padding: 10px 12px;
+            font-size: 0.87rem;
+        }
+        .embed-title {
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .attachments {
+            margin-top: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .attachment-link {
+            color: #60a5fa;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+        .attachment-link:hover { text-decoration: underline; }
+        .footer {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            margin-top: 28px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-top">
+                <div>
+                    <div class="server-title">{{ guild_name }}</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                        Registro Oficial de Atendimento • #{{ "%04d"|format(ticket.ticket_number) }} ({{ channel_name }})
+                    </div>
+                </div>
+                <span class="badge">{{ ticket.department }} • {{ ticket.priority|upper }}</span>
+            </div>
+            <div class="meta-grid">
+                <div class="meta-item">
+                    <div class="meta-label">Aberto Por</div>
+                    <div class="meta-value">{{ opener_display }}</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Atendente Responsável</div>
+                    <div class="meta-value">{{ staff_display }}</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Data de Abertura</div>
+                    <div class="meta-value">{{ opened_at_str }}</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Data de Fechamento</div>
+                    <div class="meta-value">{{ closed_at_str }}</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Total de Mensagens</div>
+                    <div class="meta-value">{{ messages|length }}</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">ID do Ticket</div>
+                    <div class="meta-value" style="font-size: 0.8rem;">{{ ticket.id }}</div>
+                </div>
+            </div>
+        </div>
+
+        {% if ticket.form_answers %}
+        <div class="form-box">
+            <h3>Respostas do Formulário de Abertura</h3>
+            {% for question, answer in ticket.form_answers.items() %}
+            <div class="form-row">
+                <strong>{{ question }}:</strong> {{ answer }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="messages">
+            {% for msg in messages %}
+            <div class="msg-card">
+                <img class="avatar" src="{{ msg.avatar_url }}" alt="Avatar">
+                <div class="msg-body">
+                    <div class="msg-header">
+                        <span class="author-name">{{ msg.author_name }}</span>
+                        {% if msg.is_bot %}<span class="bot-tag">BOT</span>{% endif %}
+                        <span class="timestamp">{{ msg.timestamp }}</span>
+                    </div>
+                    {% if msg.content %}
+                    <div class="msg-content">{{ msg.content }}</div>
+                    {% endif %}
+                    {% for emb in msg.embeds %}
+                    <div class="embed-preview">
+                        {% if emb.title %}<div class="embed-title">{{ emb.title }}</div>{% endif %}
+                        {% if emb.description %}<div class="msg-content">{{ emb.description }}</div>{% endif %}
+                    </div>
+                    {% endfor %}
+                    {% if msg.attachments %}
+                    <div class="attachments">
+                        {% for att in msg.attachments %}
+                        <a class="attachment-link" href="{{ att.url }}" target="_blank" rel="noopener noreferrer">
+                            📎 Anexo: {{ att.filename }} ({{ att.size_kb }} KB)
+                        </a>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="footer">
+            Transcript gerado automaticamente em {{ generated_at_str }} • {{ brand_footer }}
+        </div>
+    </div>
+</body>
+</html>
