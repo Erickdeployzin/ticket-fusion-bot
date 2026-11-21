@@ -1,6 +1,5 @@
 # Fusion Bot
 
-[![CI • Lint, Typecheck & Tests](https://github.com/Erickdeployzin/ticket-fusion-bot/actions/workflows/ci.yml/badge.svg)](https://github.com/Erickdeployzin/ticket-fusion-bot/actions/workflows/ci.yml)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-3776AB.svg?logo=python&logoColor=white)](https://www.python.org/downloads/)
 [![discord.py 2.4+](https://img.shields.io/badge/discord.py-2.4%2B-5865F2.svg?logo=discord&logoColor=white)](https://discordpy.readthedocs.io/)
 [![Pydantic v2](https://img.shields.io/badge/Pydantic-v2-E92063.svg?logo=pydantic&logoColor=white)](https://docs.pydantic.dev/)
