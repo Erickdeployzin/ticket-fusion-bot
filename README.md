@@ -5,7 +5,7 @@
 [![Pydantic v2](https://img.shields.io/badge/Pydantic-v2-E92063.svg?logo=pydantic&logoColor=white)](https://docs.pydantic.dev/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-10B981.svg)](LICENSE)
 
-Plataforma modular e escalável para administração profissional de comunidades no Discord, desenvolvida em **Python 3.11+** com **discord.py (`AutoShardedBot`)**, **Pydantic v2**, arquitetura **Repository + Service Layer** e suporte nativo multi-banco de dados (**SQLite**, **MySQL/MariaDB**, **PostgreSQL** e **MongoDB**).
+Plataforma modular e escalável para administração de comunidades no Discord, desenvolvida em **Python 3.11+** com **discord.py (`AutoShardedBot`)**, **Pydantic v2**, arquitetura **Repository + Service Layer** e suporte nativo multi-banco de dados (**SQLite**, **MySQL/MariaDB**, **PostgreSQL** e **MongoDB**).
 
 ---
 
